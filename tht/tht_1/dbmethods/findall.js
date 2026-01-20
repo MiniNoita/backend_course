@@ -1,1 +1,0 @@
-//hakee kaikki opiskelijat
