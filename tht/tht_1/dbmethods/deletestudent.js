@@ -1,0 +1,1 @@
+// poistaa opiskelijan opiskelijatunnuksen perusteella
