@@ -1,0 +1,30 @@
+# Dependency Directories
+node_modules/
+
+# TypeScript Build Output
+dist/
+out/
+*.tsbuildinfo
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+
+# Databases (Local Data & Dumps)
+*.sql
+*.bson
+dump/
+data/
+*.rdb
+*.aof
+dockerconts/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# OS Metadata
+.DS_Store
+Thumbs.db

@@ -1,0 +1,15 @@
+{
+  "name": "mongoconnect",
+  "version": "1.0.0",
+  "description": "mongodb mongoose connection",
+  "main": "mongoconnect.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "tuito",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.1.1"
+  }
+ 
+}
