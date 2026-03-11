@@ -1,18 +1,16 @@
 const mysql = require('mysql2');
 
-function mysqlconnect() {
-  const conn = mysql.createConnection({
-    user: 'root',
-    password: 'password',
-    database: 'koetietokanta',
-  });
+const conn = mysql.createConnection({
+  user: 'root',
+  password: 'password',
+  database: 'nodemysql',
+});
 
-  conn.connect((err) => {
-    if (err) {
-      return console.error('MySQL yhteysvirhe: ' + err.message);
-    }
-    console.log('Yhteys MySQL-kantaan toimii!');
-  });
-}
+conn.connect((err) => {
+  if (err) {
+    return console.error('MySQL yhteysvirhe: ' + err.message);
+  }
+  console.log('Yhteys MySQL-kantaan toimii!');
+});
 
-mysqlconnect();
+module.exports = conn;
