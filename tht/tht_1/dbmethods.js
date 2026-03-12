@@ -4,33 +4,37 @@ const Dbmethods = {
   addStudent(student, callback) {
     const allowedList = ['studentcode', 'name', 'email', 'studypoints'];
 
-    const filteredData = Object.keys(student).filter((key) =>
-      allowedList.includes(key),
-    );
-    conn.query('INSERT INTO Students SET ?', student, callback);
-  },
-  findAll() {
-    conn.query(`SELECT * FROM Students`, (err, rows) => {
-      if (err) throw err;
+    const filteredData = Object.keys(student)
+      .filter((key) => allowedList.includes(key))
+      .reduce((obj, key) => {
+        obj[key] = student[key];
+        return obj;
+      }, {});
 
-      console.log('Data received from Db:');
-      console.log(rows);
-    });
+    conn.query('INSERT INTO Students SET ?', filteredData, callback);
   },
-  findBelowLimit(limit) {
-    conn.query(
-      `SELECT * FROM Students WHERE studypoints < ${limit}`,
-      (err, rows) => {
-        if (err) throw err;
-
-        console.log('Data received from Db:');
-        console.log(rows);
-      },
-    );
+  findAll(callback) {
+    conn.query(`SELECT * FROM Students`, callback);
+  },
+  findBelowLimit(limit, callback) {
+    conn.query(`SELECT * FROM Students WHERE studypoints < ?`, limit, callback);
   },
   deleteStudent() {},
   updatePoints() {},
-  addGrade() {},
+  addGrade(studentcode, coursecode, grade, callback) {
+    conn.query(
+      'INSERT INTO Grades SET studentcode = ?, coursecode = ?, grade = ?',
+      [studentcode, coursecode, grade],
+      callback,
+    );
+  },
+  addPoints(points, studentcode, callback) {
+    conn.query(
+      `UPDATE Students SET studypoints = studypoints + ? WHERE studentcode = ?`,
+      [points, studentcode],
+      callback,
+    );
+  },
   updateGrade() {},
 };
 

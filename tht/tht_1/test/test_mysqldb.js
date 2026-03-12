@@ -3,25 +3,26 @@
  */
 // kantayhteys otetaan dbconnection.js -tiedostossa joka on sisällytetty
 // require-lauseella Dbmethods.js -tiedostoon
-const Dbmethods = require('../Dbmethods');
+const Dbmethods = require('../dbmethods');
 const chai = require('chai'); // chai versio 5 ja uudemmat eivät toimi enää requirella
 const expect = chai.expect;
 
+const testStudent = {
+  studentcode: 'x1234',
+  name: 'Testi Opiskelija',
+  email: 'x1234@jamk.fi',
+  studypoints: 0,
+};
+
 describe('Testing mysql', () => {
   it('should save data to test database', (done) => {
-    Dbmethods.addStudent(
-      'x1234',
-      'Testi Opiskelija',
-      'x1234@jamk.fi',
-      0,
-      (err, result) => {
-        if (err) {
-          throw err;
-        }
-        console.log(result.affectedRows + ' records inserted');
-        done();
+    Dbmethods.addStudent(testStudent, (err, result) => {
+      if (err) {
+        throw err;
       }
-    );
+      console.log(result.affectedRows + ' records inserted');
+      done();
+    });
   });
 
   it('should retrieve correct data from test database', (done) => {
