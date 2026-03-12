@@ -35,7 +35,13 @@ const Dbmethods = {
       callback,
     );
   },
-  updateGrade() {},
+  updateGrade(newGrade, studentcode, coursecode, callback) {
+    conn.query(
+      'UPDATE Grades SET grade = ? WHERE studentcode = ? AND coursecode = ?',
+      [newGrade, studentcode, coursecode],
+      callback,
+    );
+  },
 };
 
 //pitää exportaa jotta muut tiedostot löytävät tänne
