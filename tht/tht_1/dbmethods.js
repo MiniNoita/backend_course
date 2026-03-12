@@ -19,8 +19,23 @@ const Dbmethods = {
   findBelowLimit(limit, callback) {
     conn.query(`SELECT * FROM Students WHERE studypoints < ?`, limit, callback);
   },
-  deleteStudent() {},
-  updatePoints() {},
+  updatePoints(addPoints, value, studentcode, callback) {
+    if (addPoints) {
+      //lisätään pisteitä
+      conn.query(
+        'UPDATE Students SET studypoints = studypoints + ? WHERE studentcode = ?',
+        [value, studentcode],
+        callback,
+      );
+    } else {
+      //vähennetään pisteitä
+      conn.query(
+        'UPDATE Students SET studypoints = studypoints - ? WHERE studentcode = ?',
+        [value, studentcode],
+        callback,
+      );
+    }
+  },
   addGrade(studentcode, coursecode, grade, callback) {
     conn.query(
       'INSERT INTO Grades SET studentcode = ?, coursecode = ?, grade = ?',
@@ -39,6 +54,20 @@ const Dbmethods = {
     conn.query(
       'UPDATE Grades SET grade = ? WHERE studentcode = ? AND coursecode = ?',
       [newGrade, studentcode, coursecode],
+      callback,
+    );
+  },
+  deleteStudent(studentcode, callback) {
+    conn.query(
+      'DELETE FROM Students WHERE studentcode = ?',
+      studentcode,
+      callback,
+    );
+  },
+  deleteGrade(studentcode, coursecode, callback) {
+    conn.query(
+      'DELETE FROM Grades WHERE studentcode = ? AND coursecode = ?',
+      [studentcode, coursecode],
       callback,
     );
   },

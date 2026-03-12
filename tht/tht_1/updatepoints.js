@@ -1,7 +1,15 @@
 const Dbmethods = require('./dbmethods');
 
-Dbmethods.updatePoints(3, 'a1234', '3002', (err, result) => {
+const addPoints = true;
+
+Dbmethods.updatePoints(addPoints, 5, 'a1234', (err, result) => {
   if (err) throw err;
 
-  console.log(result.affectedRows + ' records have been updated');
+  if (addPoints) {
+    console.log(result.affectedRows + ' rows affected, points have been added');
+  } else {
+    console.log(
+      result.affectedRows + ' rows affected, points have been reduced',
+    );
+  }
 });
