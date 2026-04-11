@@ -10,6 +10,9 @@ out/
 .env
 .env.local
 .env.*.local
+*.pem
+*.key
+*.crt
 
 # Databases (Local Data & Dumps)
 *.sql
