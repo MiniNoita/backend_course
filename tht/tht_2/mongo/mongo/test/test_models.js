@@ -3,7 +3,7 @@
   on Studentin alidokumentti. Alidokumentin skeema liitetään requirella
   päädokumentin skeemaan.
 */
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const expect = require('chai').expect;
 const Student = require('../models/Student'); // Student model
 
