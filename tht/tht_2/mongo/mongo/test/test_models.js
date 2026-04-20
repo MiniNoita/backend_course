@@ -4,11 +4,11 @@
   päädokumentin skeemaan.
 */
 import mongoose from 'mongoose';
-const expect = require('chai').expect;
-const Student = require('../models/Student'); // Student model
+import { expect } from 'chai';
+import Student from '../models/Student.js'; // Student model
 
-const GradeSchema = require('../models/Grade'); // Grade schema
-const Grade = mongoose.model('Grade', GradeSchema); // Skeemasta tehdään model vasta tässä
+import Gradeschema from '../models/Grade.js'; // Grade schema
+const Grade = mongoose.model('Grade', Gradeschema); // Skeemasta tehdään model vasta tässä
 
 const s = new Student({
   studypoints: -1,

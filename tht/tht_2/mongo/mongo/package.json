@@ -28,6 +28,5 @@
     "eslint-config-google": "^0.14.0",
     "mocha": "^11.0.1",
     "chai": "^4.3.10"
-  },
-  "type": "module"
+  }
 }
