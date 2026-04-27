@@ -4,12 +4,13 @@
   päädokumentin skeemaan. Testi ei mene läpi tehtävän alkutilanteessa, koska
   sovelluksessa ei vielä ole modelia.
 */
-const mongoose = require('mongoose');
-const expect = require('chai').expect;
-const Student = require('../models/Student'); // Student model
 
-const GradeSchema = require('../models/Grade'); // Grade schema
-const Grade = mongoose.model('Grade', GradeSchema); // Skeemasta tehdään model vasta tässä
+import mongoose from 'mongoose';
+import { expect } from 'chai';
+import Student from '../models/Student.js'; // Student model
+
+import Gradeschema from '../models/Grade.js'; // Grade schema
+const Grade = mongoose.model('Grade', Gradeschema); // Skeemasta tehdään model vasta tässä
 
 const s = new Student({
   studypoints: -1,

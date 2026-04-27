@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 
-const app = require('../app');
-const debug = require('debug')('websk-t18:server');
-const http = require('http');
-
+import app from '../app.js';
+import debugLib from 'debug';
+const debug = debugLib('websk-t18:server');
+import http from 'http';
 /**
  * Get port from environment and store in Express.
  */

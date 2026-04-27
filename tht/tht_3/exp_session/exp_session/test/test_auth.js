@@ -4,8 +4,8 @@
 */
 
 //const expect = require('chai').expect; // tarpeeton koska supertest sisältää oman expectin
-const app = require('../app');
-const request = require('supertest'); // supertest-kirjastoa käytetään pyyntöjen (request) testaukseen
+import request from 'supertest'; // supertest-kirjastoa käytetään pyyntöjen (request) testaukseen
+import app from '../app.js';
 
 describe('Test authentication', (done) => {
   const user = {

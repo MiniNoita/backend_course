@@ -9,7 +9,7 @@ url -osoitteet joiden kautta lähetetään tai haetaan dataa
   SPA-sovelluksissa
 */
 
-const express = require('express');
+import express from 'express';
 // Reititys toimii router -olion kautta
 const router = express.Router();
 let sess;
@@ -114,4 +114,4 @@ router.get('/logout', function (req, res) {
   });
 });
 
-module.exports = router;
+export default router;
