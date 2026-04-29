@@ -82,10 +82,34 @@ router.get('/sivu1', function (req, res) {
 router.get('/sivu2', function (req, res) {
   sess = req.session; // laitetaan sessio-olio muuttujaan sess
   // tätä sivua ei ole suojattu salasanalla, mutta sessiossa ollaan silti
-  res.render('sivu2', {
-    title: 'Olet nyt sessiossa sivulla sivu2!',
-    sessid: sess.id,
-  }); //salainen sivu
+  if (sess.pass === 'qwerty') {
+    res.render('sivu2', {
+      title: 'Olet nyt sessiossa sivulla sivu2!',
+      sessid: sess.id,
+    }); //salainen sivu
+  } else {
+    res.render('error', {
+      // jos passu väärä, mennään error-sivulle
+      message: 'Kirjautuminen epäonnistui',
+    });
+  }
+});
+
+//reitti sivu3-sivulle
+router.get('/sivu3', function (req, res) {
+  sess = req.session; // laitetaan sessio-olio muuttujaan sess
+  // tätä sivua ei ole suojattu salasanalla, mutta sessiossa ollaan silti
+  if (sess.pass === 'qwerty') {
+    res.render('sivu3', {
+      title: 'Olet nyt sessiossa sivulla sivu3!',
+      sessid: sess.id,
+    }); //salainen sivu
+  } else {
+    res.render('error', {
+      // jos passu väärä, mennään error-sivulle
+      message: 'Kirjautuminen epäonnistui',
+    });
+  }
 });
 
 // reitti JSON-Apiin voidaan myös suojata sessiolla

@@ -1,0 +1,9 @@
+EXPRESS JAVASCRIPT REST-API MYSQL-KANNALLE
+
+Yksinkertainen REST-API, joka on tehty Nodejs:n mysql2/promise-kirjastolla, ja jossa on
+käytetty ES6-modules -moduulisysteemiä. Huomaa että package.json:issa on määritys "type": "module".
+
+Arkkitehtuuri noudattaa express-generatorin yksinkertaista arkkitehtuuria. Express-generatorin
+tuottamaa vanhentunutta koodia on hieman modernisoitu.
+
+API:ssa on vain kaksi metodia ja reittiä. Loput voit tehdä itse. Myös API:n suojaus puuttuu.
