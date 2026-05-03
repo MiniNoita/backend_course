@@ -10,6 +10,8 @@ url -osoitteet joiden kautta lähetetään tai haetaan dataa
 */
 
 import express from 'express';
+import '../dbconnect.js';
+import Student from '../models/Student.js';
 // Reititys toimii router -olion kautta
 const router = express.Router();
 let sess;
@@ -96,13 +98,24 @@ router.get('/sivu2', function (req, res) {
 });
 
 //reitti sivu3-sivulle
-router.get('/sivu3', function (req, res) {
+router.get('/sivu3', async function (req, res) {
   sess = req.session; // laitetaan sessio-olio muuttujaan sess
   // tätä sivua ei ole suojattu salasanalla, mutta sessiossa ollaan silti
   if (sess.pass === 'qwerty') {
+    async function findStudents() {
+      const students = await Student.find().catch((err) => {
+        throw err;
+      });
+
+      return students;
+    }
+
+    const opiskelija = await findStudents();
+
     res.render('sivu3', {
       title: 'Olet nyt sessiossa sivulla sivu3!',
       sessid: sess.id,
+      students: opiskelija,
     }); //salainen sivu
   } else {
     res.render('error', {
