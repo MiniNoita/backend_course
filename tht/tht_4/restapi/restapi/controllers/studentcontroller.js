@@ -57,7 +57,101 @@ const StudentController = {
     } catch (err) {
       throw err;
     }
-  }, //jne...
+  },
+  async deleteStudent(req, res) {
+    try {
+      //Mongoose-kantaoperaatio tänne
+      const student = await Student.findOneAndDelete({
+        _id: req.params.id,
+      }).catch((err) => {
+        throw err;
+      });
+      res.json(student);
+    } catch (err) {
+      throw err;
+    }
+  },
+  async updateGrade(req, res) {
+    try {
+      //Mongoose-kantaoperaatio tänne
+      const grade = await Student.findOneAndUpdate(
+        {
+          studentcode: req.params.scode,
+          'grades.coursecode': req.params.ccode,
+        },
+        {
+          $set: { 'grades.$.grade': req.body.grade },
+        },
+      );
+
+      console.log('Grade updated: ' + grade);
+
+      res.json(grade);
+    } catch (err) {
+      throw err;
+    }
+  },
+  async updateGradeAndPoints(req, res) {
+    try {
+      //Mongoose-kantaoperaatio tänne
+      const result = await Student.findOneAndUpdate(
+        {
+          studentcode: req.params.scode,
+          'grades.coursecode': req.params.ccode,
+        },
+        {
+          $set: {
+            'grades.$.grade': req.body.grade,
+          },
+          $inc: { studypoints: 5 },
+        },
+      );
+
+      console.log('Grade updated: ' + result);
+
+      res.json(result);
+    } catch (err) {
+      throw err;
+    }
+  },
+  async updateStudent(req, res) {
+    try {
+      const result = await Student.findOneAndUpdate(
+        {
+          studentcode: req.params.scode,
+        },
+        {
+          $set: { [req.params.update]: req.body.value },
+        },
+      );
+
+      res.json(result);
+    } catch (err) {
+      throw err;
+    }
+  },
+  async findBelowLimit(req, res) {
+    try {
+      const students = await Student.find({
+        studypoints: { $lt: req.params.limit },
+      });
+
+      res.json(students);
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  async findByCourse(req, res) {
+    try {
+      const result = await Student.find({
+        grades: { $elemMatch: { coursecode: req.params.ccode } },
+      });
+      res.json(result);
+    } catch (err) {
+      throw err;
+    }
+  },
 };
 
 export default StudentController;
