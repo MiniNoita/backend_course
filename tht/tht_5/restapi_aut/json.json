@@ -1,0 +1,13 @@
+{
+  "studentcode": "a1234",
+  "name": "Aapo Opiskelija",
+  "email": "a1234@jamk.fi",
+  "studypoints": 5,
+  "grades": [
+    {
+      "coursecode": "HTS10600",
+      "grade": 5,
+      "_id": "69e34b47d0320b50c85b8d89"
+    }
+  ]
+}
