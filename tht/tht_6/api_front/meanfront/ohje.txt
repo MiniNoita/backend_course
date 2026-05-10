@@ -1,0 +1,29 @@
+FULL-STACK -KIRJAUTUMINEN
+ 
+
+1. Käyttäjä syöttää tunnarit frontendin lomakkeelle (login.component.html)
+2. Tunnarit lähetetään login-komponentista auth-servicen avulla backendin
+users/login-reittiin
+3. Backendin usercontrollerissa olevasta autentikaatiometodista palautuu 
+auth-serviceen JWT-token, jos tunnarit olivat oikeat
+4. Auth-serviceen saatu JWT-token tallennetaan selaimen sessionstorageen
+5. Siirryttäessä frontendissä admin-komponettiin, tarkistetaan että token
+on sessionstoragessa, tai muuten käyttäjää ei päästetä sinne (auth.guard)
+6. Kun käyttäjä suorittaa admin-komponentissa muokkauksia tietokantaan, 
+lähtee backendin reitteihin kohdistuvien pyyntöjen mukana token. Ilman 
+sitä kyseisiin reitteihin ei ole pääsyä 
+
+Tässä full-stack -kirjautumisessa tunnarit ovat omassa tietokannassa. Tunnarit
+voisivat olla myös pilvipalvelussa, kuten AWS Cognitossa tai Google Cloudissa.
+Tämä on yleensä järkevämpää, koska tällöin sovelluksen ylläpitäjän ei tarvitse 
+itse olla vastuussa tunnarien säilyttämisestä.
+
+Jos tunnarit ovat pilvipalvelussa, lähetetään frontendin kirjautumislomakkeelle 
+kirjoitetut tunnarit sinne. Sieltä palautuu token tai useampia tokeneita frontendiin.
+Saadulla id-tokenilla voidaan siirtyä frontend-sovelluksen tunnistautumista vaativiin
+näkymiin. Frontendiin suoraan pilvipalvelusta tulleella tokenilla ei kuitenkaan voi 
+suojata reittejä backendiin, sillä tokenissa ei ole tietoa backendin oikeellisuudesta,
+eli backendistä saatu secret-key puuttuu. Siksi pilvipalvelusta saatu id-token pitää
+lähettää backendiin, ja siitä luodaan siellä uusi JWT-token, joka lähetetään takaisin
+frontendiin. Tällä uudella backendissä luodulla ja frontendiin lähetetyllä JWT-tokenilla 
+voidaan suorittaa backendin reitteihin kohdistuvien pyyntöjen suojaus.

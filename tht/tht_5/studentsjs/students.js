@@ -9,7 +9,7 @@ const router = express.Router();
 const studentController = require('../controllers/studentcontroller'); // student-reittien kontrolleri
 const authorize = require('../verifytoken'); // authorisointi eli vahvistetaan token
 
-// get-reiteissa ei ole suojausta, eli kuka tahansa voi hakea tietoa 
+// get-reiteissa ei ole suojausta, eli kuka tahansa voi hakea tietoa
 router.get('/', studentController.findAll);
 router.get('/:id', studentController.findById);
 //...ja muut get-reitit tähän perään.
@@ -23,6 +23,5 @@ router.delete('/:id', authorize, studentController.deleteStudent);
 router.put('/:id', authorize, studentController.updateStudent);
 router.put('/addcourse/:id', authorize, studentController.addCourse);
 //...ja muut post,put ja delete-reitit tähän perään.
-
 
 module.exports = router;

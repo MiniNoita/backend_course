@@ -152,6 +152,21 @@ const StudentController = {
       throw err;
     }
   },
+
+  async updateById(req, res) {
+    try {
+      //Mongoose-kantaoperaatio tänne
+      const student = await Student.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+      ).catch((err) => {
+        throw err;
+      });
+      res.json(student);
+    } catch (err) {
+      throw err;
+    }
+  },
 };
 
 export default StudentController;

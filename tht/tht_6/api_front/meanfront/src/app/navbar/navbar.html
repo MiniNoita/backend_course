@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#/">Opiskelijarekisteri</a>
+    <!-- Toggler/collapsibe Button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapsibleNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+  <div
+    class="collapse navbar-collapse"
+    id="collapsibleNavbar"
+    style="margin-left: 5px"
+  >
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/">Opiskelijat</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin">Admin</a>
+      </li>
+      @if(!login){
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      } @if(login){
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login" (click)="doLogout()">Logout</a>
+      </li>
+      }
+    </ul>
+  </div>
+</nav>

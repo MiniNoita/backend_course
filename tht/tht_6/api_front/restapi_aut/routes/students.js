@@ -1,5 +1,6 @@
 import express from 'express';
 import StudentController from '../controllers/studentcontroller.js';
+import verifyToken from '../verifytoken.js';
 
 const studentsRoute = express.Router();
 
@@ -9,17 +10,22 @@ studentsRoute.get('/:id', StudentController.findById);
 
 studentsRoute.get('/code/:studentcode', StudentController.findByStudentCode);
 
-studentsRoute.post('/addstudent', StudentController.addStudent);
+studentsRoute.post('/addstudent', verifyToken, StudentController.addStudent);
 
-studentsRoute.delete('/:id', StudentController.deleteStudent);
+studentsRoute.delete('/:id', verifyToken, StudentController.deleteStudent);
 
-studentsRoute.put('/updategrade/:scode/:ccode', StudentController.updateGrade);
+studentsRoute.put(
+  '/updategrade/:scode/:ccode',
+  verifyToken,
+  StudentController.updateGrade,
+);
 
 //http://localhost:3000/students/updategp/t1234/HTS10600
 // {"grade": 3}
 
 studentsRoute.put(
   '/updategp/:scode/:ccode',
+  verifyToken,
   StudentController.updateGradeAndPoints,
 );
 
@@ -27,6 +33,7 @@ studentsRoute.put(
 //{"value": "Joku muu Matti"}
 studentsRoute.put(
   '/updatestudent/:scode/:update',
+  verifyToken,
   StudentController.updateStudent,
 );
 
@@ -34,5 +41,7 @@ studentsRoute.get('/findbelow/:limit', StudentController.findBelowLimit);
 
 //http://localhost:3000/students/findbycourse/HTS10600
 studentsRoute.get('/findbycourse/:ccode', StudentController.findByCourse);
+
+studentsRoute.put('/:id', verifyToken, StudentController.updateById);
 
 export default studentsRoute;
