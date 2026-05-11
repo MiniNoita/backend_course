@@ -1,0 +1,6 @@
+Tehtävä: Kerro lyhyesti miten toteuttaisit sosiaalisen Google-loginin full stack -sovellukseen, niin että kirjautuminen tapahtuu Angular-sovelluksesta ja tietyt REST API -reitit ja Angular-sovelluksen SPA-näkymät on suojattu. Tätä toiminnallisuutta ei tarvitse tässä tehtävässä toteuttaa käytännössä, mutta olisi hyvä jos osaisit kertoa kuinka lähtisit toteuttamaan sitä. Voit katsoa mallia kurssin esimerkeistä.
+
+
+VASTAUS:
+
+Angulaariin toteuttaisiin tuo alku osa eli sosiaalinen login. Tällä tarkoitan osa-aluetta, jolla voidaan päästä etusivulle/seuraavalle (salaiselle) sivulle, johon pääsee vain kun on kirjautunut sisään. Tämän jälkeen frontend eli Angular lähettäisi Backendille käyttäjän tiedot kuten google idTokenin(joko heti tai kun käyttäjä koittaa päästä johonkin API rajanpintaan johon ei pääse ilman JWT Tokenia). Kun nämä tiedot on backendissä, backend tunnistaa käyttäjän ja luo oman JWT-tokenin käyttäjälle, josta käyttäjä tunnistetaan. Tämä JWT-token voidaan lähettää frontendille, jota voidaan käyttää endpointeissa niin, ettei sinne pääse ilman tätä persoonaalista JWT-tokenia. 
