@@ -1,0 +1,41 @@
+Nodejs-sovelluksessa tarvitaan GOOGLE_CLIENT_ID ja GOOGLE_CLIENT_SECRET.
+Ne saadaan Google Cloud -pilvipalvelualustalle luodusta projektista,
+jossa käytetään tässä tapauksessa Gmail-API:a.
+
+1. Mene Google Cloud -konsoliin https://console.cloud.google.com/. 
+Kirjaudu sisään Google-tunnuksillasi.
+
+2. Luo uusi projekti. Anna sille nimi ja paina create.
+
+3. Valitse valikosta vasemmalta APIs and Services.
+
+4. Valitse yläpalkista + Enable APIs and Services ja sieltä Gmail-API. Paina Enable,
+
+5. Paina seuraavassa näkymässä Create credentials -linkkiä.
+
+6. Credential Type -näkymässä valitse Gmail API ja User data.
+
+7. Oauth consent screen -näkymässä anna nimi joka näkyy 
+kirjautumisruudussa. Support email on oma gmail-osoitteesi. 
+App Logoa ei tarvitse laittaa. Developer contact information on
+oma gmail-osoitteesi.
+
+8. Scopes-näkymän voit hypätä yli.
+
+9. OAuth Client ID -näkymässä valitse Web-application. Clientin nimi
+voi olla sama kuin projektin nimi. Authorized JavaScript origins -kohtaan 
+laita http://localhost:3000. Authorized redirect URIs kohtaan laita 
+http://localhost:3000/auth/google/callback
+
+10. GOOGLE_CLIENT_ID ja GOOGLE_CLIENT_SECRET on nyt luotu. Mene vasemmalla
+olevasta valikosta Credentials-sivulle, ja klikkaa luodun clientin nimeä.
+avautuneelta sivulta voit poimia GOOGLE_CLIENT_ID:n ja GOOGLE_CLIENT_SECRET:in 
+
+11. Laita ne Nodejs-sovelluksesi .env -tiedostoon. Kun kokeilet sovellusta,
+Google-autentikaation pitäisi toimia. Kokeile ensin siten, että et ole Chromessa
+valmiiksi kirjautuneena Google-tunnuksilla, vaan kirjaudu tarvittaessa ulos.
+Silloin pääset kirjautumisruudulle (consent screen). Jos olet jo kirjautuneena,
+pääset suoraan "salaiselle sivulle".
+
+
+
