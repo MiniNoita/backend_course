@@ -1,0 +1,63 @@
+<!-- Socket.io-client joka on tehty ilman mitään sovelluskehystä tai apukirjastoa.
+     clientin serveri on tiedostossa server.js-->
+<!doctype html>
+<html>
+  <head>
+    <title>client</title>
+    <!-- socket.io-kirjasto löytyy node_modules kansiosta tällä polkumäärityksellä
+        se voitaisiin hakea myös webistä CDN:stä-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      //Luodaan clientin socket joka yhdistetään serveriin
+      //const socket = io.connect('http://localhost:3010');
+      /*Aina kun 'message_to_client'-tapahtuma saapuu serveriltä, laitetaan
+                 saapunut data (data.message) div-tagien (id="chat") väliin. Aikaisempi, eli
+        vanha data kirjoitetaan uuden datan perään, joten se ei häviä.
+      */
+      // socket.on('message_to_client', (data) => {
+      //   document.getElementById('chat').innerHTML =
+      //     '<br>' + data.message + document.getElementById('chat').innerHTML;
+      // });
+
+      // function sendMessage() {
+      //   //otetaan alla olevan tekstikentän sisältö talteen
+      //   const contents = document.getElementById('message_input').value;
+      //   //emitoidaan tapahtuma 'message_to_server' jolla data lähtee serverille avain-arvo parina
+      //   socket.emit('message_to_server', { message: contents });
+      // }
+
+      /*My code */
+
+      const socket = io.connect('http://localhost:3010');
+
+      socket.on('welcome', function (data) {
+        console.log(data);
+        document.getElementById('welcome').innerHTML =
+          `Welcome to the game user: <strong> ${data.name} </strong>`;
+        document.getElementById('game').innerHTML =
+          'Try to guess number between 1 and 100';
+      });
+
+      socket.on('message_to_client', (data) => {
+        document.getElementById('usersQuesses').innerHTML =
+          `<br>${data.user}: <strong>${data.number}</strong> ${data.message} ${document.getElementById('usersQuesses').innerHTML}`;
+      });
+      function sendQuess() {
+        //otetaan alla olevan tekstikentän sisältö talteen
+        const userQuess = document.getElementById('quess_input').value;
+        //emitoidaan tapahtuma 'message_to_server' jolla data lähtee serverille avain-arvo parina
+        socket.emit('message_to_server', { message: userQuess });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="welcome"></div>
+    <hr />
+    <div id="game"></div>
+    <input type="number" id="quess_input" />
+    <button onclick="sendQuess()">send</button>
+    <!-- chattiviestit tulevat tähän-->
+    <!-- <div id="chat"></div> -->
+    <div id="usersQuesses"></div>
+  </body>
+</html>
